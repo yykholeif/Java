@@ -50,6 +50,7 @@ public String checkGameWinner(char [][]grid){
             return "X wins";
         }
 
+        //check for tie
         if (freeSpots > 0) {
             return result;
         } else {
