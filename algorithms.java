@@ -161,6 +161,8 @@ public int monopolyRoll() {
 
 
 //find the index of the two integers within an array that add up to our target sum
+//Time complexity : O(n^2)
+//Space complexity : O(1)
 class Solution {
     
     public int[] twoSum(int[] nums, int target) {
