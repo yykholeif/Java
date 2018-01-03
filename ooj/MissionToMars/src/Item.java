@@ -1,15 +1,29 @@
 public class Item {
     private String name;
-    public int weight;
+    private int weight;
 
-     public Item(String name, int weight) {
-        this.name = name;
-        this.weight = weight;
+     public Item(String ItemName, int ItemWeight) {
+        this.name = ItemName;
+        this.weight = ItemWeight;
     }
 
-    //getter method
-    public int weight() {
-         return this.weight;
+    //helper methods
+
+    public String getName() {
+         return name;
     }
+
+    public int getWeight() {
+         return weight;
+    }
+
+    public String setName(String iName) {
+         return name = iName;
+    }
+
+    public int setWeight(int iWeight) {
+        return weight = iWeight;
+    }
+
 
 }
