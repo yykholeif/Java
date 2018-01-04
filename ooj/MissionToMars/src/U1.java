@@ -8,11 +8,14 @@ public class U1 extends Rocket {
      * Chance of launch explosion = 5% * (cargo carried / cargo limit)
      * Chance of landing crash =    1% * (cargo carried / cargo limit)
      */
-    private double cargoTonnesCarried = 0;
+    private int cargoTonnesCarried = 0;
 
-    U1(double cost, double weight, double maxWeight, double cargoWeight) {
-        super(cost, weight, maxWeight);
-        cargoTonnesCarried = cargoWeight;
+    U1() {
+        super();
+        int costMillions = 100;
+        int weight = 10000;
+        int maxWeight = 18000;
+        cargoTonnesCarried = getCurrentCargoWeight();
     }
 
     @Override
