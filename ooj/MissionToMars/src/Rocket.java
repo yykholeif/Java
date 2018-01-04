@@ -1,15 +1,15 @@
 public class Rocket implements SpaceShip{
 
-    private double costMillions;
-    private double weightTonnes;
-    private double maxWeightTonnes;
-    private double cargoLimit;
+    private int costMillions;
+    private int weight;
+    private int maxWeight;
+    private int cargoLimit;
     private int currentCargoWeight = 0;
 
-    Rocket(double cost, double weight, double maxWeight) {
-        this.costMillions = cost;
-        this.weightTonnes = weight;
-        this.maxWeightTonnes = maxWeight;
+    Rocket() {
+        this.costMillions = costMillions;
+        this.weight = weight;
+        this.maxWeight = maxWeight;
         //calculate cargo limit
         cargoLimit = maxWeight - weight;
 
@@ -17,19 +17,19 @@ public class Rocket implements SpaceShip{
 
     //getter methods
 
-    public double getCostMillions() {
+    public int getCostMillions() {
         return costMillions;
     }
 
-    public double getWeightTonnes() {
-        return weightTonnes;
+    public int getWeightTonnes() {
+        return weight;
     }
 
-    public double getMaxWeightTonnes() {
-        return maxWeightTonnes;
+    public int getMaxWeightTonnes() {
+        return maxWeight;
     }
 
-    public double getCargoLimit() {
+    public int getCargoLimit() {
         return cargoLimit;
     }
 
@@ -39,8 +39,8 @@ public class Rocket implements SpaceShip{
 
     //setter methods
 
-    public void setCurrentCargoWeight(int newCargoWeight) {
-        currentCargoWeight = newCargoWeight;
+    public void addCurrentCargoWeight(Item cargo) {
+        currentCargoWeight += cargo.getWeight();
     }
 
 
@@ -56,22 +56,18 @@ public class Rocket implements SpaceShip{
     }
 
     @Override
-    public boolean canCarry(Item item) {
-        if(weightTonnes + item.getWeight() <= maxWeightTonnes){
-            return true;
-        } else {
-            return false;
-        }
+    public boolean canCarry(Item cargo) {
+        return (this.currentCargoWeight + cargo.getWeight() <= getCargoLimit());
     }
 
     @Override
-    public double carry(Item item) {
-        if (canCarry(item)) {
-            this.weightTonnes += item.getWeight();
-            return this.weightTonnes;
+    public void carry(Item cargo) {
+        if (canCarry(cargo)) {
+            //no need to call weight as this is handled in setter
+            addCurrentCargoWeight(cargo);
         } else {
-            System.out.println("Cargo full, unable to add additional items current cargo weight is: ");}
-            return weightTonnes;
+            System.out.println("Cargo full, unable to add additional items.");
+        }
     }
 
 
