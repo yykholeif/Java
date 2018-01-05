@@ -7,7 +7,7 @@ public class Main {
 
         ArrayList<Item> cargo = simulation.loadItems(1);
 
-        simulation.loadU1(cargo); //error loading infinte loop
+        simulation.loadU1(cargo);
         simulation.loadU2(cargo);
         simulation.runSimulation(2);
 
