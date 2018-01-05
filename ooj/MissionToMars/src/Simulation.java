@@ -42,76 +42,101 @@ public class Simulation {
     }
 
     //load U1 rockets with Cargo
-    ArrayList<U1> loadU1(ArrayList<Item> phaseCargo) throws FileNotFoundException {
+    ArrayList<U1> loadU1(ArrayList<Item> phaseCargo) throws Exception {
         ArrayList<U1> u1RocketsArray = new ArrayList<U1>();
+        System.out.println(u1RocketsArray);
 
         while(!phaseCargo.isEmpty()) {
 
             //create a loop to iterate and fill up rockets one by one
+            U1 u1Rocket = new U1();
             for (Item item : phaseCargo) {
-
-                //remove hardcoding of rocket attributes && handle conversion of KG to Tonnes
-                U1 u1Rocket = new U1();
-
+                System.out.println(item);
                 if (u1Rocket.canCarry(item)){
                     u1Rocket.carry(item);
                     phaseCargo.remove(item);
-                    u1RocketsArray.add(u1Rocket);
                 } else {
                     break;
                 }
             }
+            u1RocketsArray.add(u1Rocket);
         }
+        System.out.println(u1RocketsArray);
         return u1RocketsArray;
     }
 
     //load U2 rockets with Cargo
-    ArrayList<U2> loadU2(ArrayList<Item> phaseCargo) throws FileNotFoundException {
+    ArrayList<U2> loadU2(ArrayList<Item> phaseCargo) throws Exception {
         ArrayList<U2> u2RocketsArray = new ArrayList<U2>();
 
         while(!phaseCargo.isEmpty()) {
 
             //create a loop to iterate and fill up rockets one by one
+            U2 u2Rocket = new U2();
             for (Item item : phaseCargo) {
-
-                //remove hardcoding of rocket attributes && handle conversion of KG to Tonnes
-                U2 u2Rocket = new U2();
 
                 if (u2Rocket.canCarry(item)){
                     u2Rocket.carry(item);
                     phaseCargo.remove(item);
-                    u2RocketsArray.add(u2Rocket);
                 } else {
                     break;
                 }
             }
+            u2RocketsArray.add(u2Rocket);
         }
         return u2RocketsArray;
     }
 
-    int runSimulation() throws FileNotFoundException {
-        ArrayList<Item> phaseOneCargo = loadItems(1);
-        ArrayList<Item> phaseTwoCargo = loadItems(2);
+    void runSimulation(int phaseNumber) throws Exception {
 
-        System.out.println("Phase 1 simulation using U1 Rockets");
-        ArrayList<U1> phaseOneU1RocketsArray = loadU1(phaseOneCargo);
+        //U1 Rocket Simulation
+        System.out.println("U1 Rockets Simulation");
+        ArrayList<Item> phaseCargo = loadItems(phaseNumber);
+        ArrayList<U1> u1RocketsArray = loadU1(phaseCargo);
 
-        System.out.println("Phase 2 simulation using U1 Rockets");
-        ArrayList<U1> phaseTwoU1RocketsArray = loadU1(phaseTwoCargo);
+        int rocketCount = 0;
+        int totalBudgetMillions = 0;
+
+        for (U1 rocket : u1RocketsArray) {
+            if (!rocket.launch() || !rocket.land()) {
+                System.out.println("rocket exploded on take-off or landing");
+                rocket.launch(); //not sure if this works like a while loop, if this returns true will it retry if statement?
+                rocketCount ++;
+            } else {
+                System.out.println("Rocket Successfully landed on Mars. Rocket Number: " + u1RocketsArray.indexOf(rocket));
+                rocketCount ++;
+            }
+            totalBudgetMillions = 100 * rocketCount;
+        }
+        System.out.println("Phase: " + phaseNumber);
+        System.out.println("U1 total mission budget: $" + totalBudgetMillions);
 
 
+        //U2 Rocket Simulation
+        System.out.println("U2 Rockets Simulation ");
+        ArrayList<U2> u2RocketsArray = loadU2(phaseCargo);
 
-        System.out.println("Phase 1 simulation using U2 Rockets");
-        ArrayList<U2> phaseOneU2RocketsArray = loadU2(phaseOneCargo);
+        rocketCount = 0;
+        totalBudgetMillions = 0;
 
-        System.out.println("Phase 2 simulation using U2 Rockets");
-        ArrayList<U2> phaseTwoU2RocketsArray = loadU2(phaseTwoCargo);
-
+        for (U2 rocket : u2RocketsArray) {
+            if (!rocket.launch() || !rocket.land()) {
+                System.out.println("rocket exploded on take-off or landing");
+                rocket.launch(); //not sure if this works like a while loop, if this returns true will it retry if statement?
+                rocketCount ++;
+            } else {
+                System.out.println("Rocket Successfully landed on Mars. Rocket Number: " + u2RocketsArray.indexOf(rocket));
+                rocketCount ++;
+            }
+            totalBudgetMillions = 120 * rocketCount;
+        }
+        System.out.println("Phase: " + phaseNumber);
+        System.out.println("U2 total mission budget: $" + totalBudgetMillions);
 
     }
 
 
-
+// DRY up code by inputting phase 2 parameters: create seperate function for redundant code. get down to 100 lines
 
 
 
