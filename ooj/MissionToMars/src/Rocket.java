@@ -6,6 +6,7 @@ public class Rocket implements SpaceShip{
     private int cargoLimit;
     private int currentCargoWeight = 0;
 
+
     Rocket() {
         this.costMillions = costMillions;
         this.weight = weight;

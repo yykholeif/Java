@@ -10,6 +10,7 @@ public class U2 extends Rocket {
      * Chance of landing crash =    8% * (cargo carried / cargo limit)
      */
     private int cargoTonnesCarried = 0;
+//    private static int u2MissionBudgetMillions = 0;
 
     U2() {
         super();
