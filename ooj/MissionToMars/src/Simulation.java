@@ -44,23 +44,19 @@ public class Simulation {
     //load U1 rockets with Cargo
     ArrayList<U1> loadU1(ArrayList<Item> phaseCargo) throws Exception {
         ArrayList<U1> u1RocketsArray = new ArrayList<U1>();
-        System.out.println(u1RocketsArray);
-
-        while(!phaseCargo.isEmpty()) {
 
             //create a loop to iterate and fill up rockets one by one
             U1 u1Rocket = new U1();
             for (Item item : phaseCargo) {
-                System.out.println(item);
-                if (u1Rocket.canCarry(item)){
-                    u1Rocket.carry(item);
-                    phaseCargo.remove(item);
-                } else {
-                    break;
-                }
+                    System.out.println(item);
+                    if (u1Rocket.canCarry(item)){
+                        u1Rocket.carry(item);
+                        phaseCargo.remove(item);
+                    } else if (!u1Rocket.canCarry(item)) {
+                        u1RocketsArray.add(u1Rocket);
+                        u1Rocket = new U1();
+                    }
             }
-            u1RocketsArray.add(u1Rocket);
-        }
         System.out.println(u1RocketsArray);
         return u1RocketsArray;
     }
@@ -69,21 +65,18 @@ public class Simulation {
     ArrayList<U2> loadU2(ArrayList<Item> phaseCargo) throws Exception {
         ArrayList<U2> u2RocketsArray = new ArrayList<U2>();
 
-        while(!phaseCargo.isEmpty()) {
-
-            //create a loop to iterate and fill up rockets one by one
-            U2 u2Rocket = new U2();
-            for (Item item : phaseCargo) {
-
-                if (u2Rocket.canCarry(item)){
-                    u2Rocket.carry(item);
-                    phaseCargo.remove(item);
-                } else {
-                    break;
-                }
+        U2 u2Rocket = new U2();
+        for (Item item : phaseCargo) {
+            System.out.println(item);
+            if (u2Rocket.canCarry(item)){
+                u2Rocket.carry(item);
+                phaseCargo.remove(item);
+            } else if (!u2Rocket.canCarry(item)) {
+                u2RocketsArray.add(u2Rocket);
+                u2Rocket = new U2();
             }
-            u2RocketsArray.add(u2Rocket);
         }
+        System.out.println(u2RocketsArray);
         return u2RocketsArray;
     }
 
@@ -137,6 +130,9 @@ public class Simulation {
 
 
 // DRY up code by inputting phase 2 parameters: create seperate function for redundant code. get down to 100 lines
+// load phase 1/2 can be 1 function with parameter
+    //1 function for runSimulation as well
+
 
 
 
