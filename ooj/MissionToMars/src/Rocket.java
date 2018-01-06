@@ -1,20 +1,10 @@
 public class Rocket implements SpaceShip{
-
-    private int costMillions;
-    private int weight;
-    private int maxWeight;
-    private int cargoLimit;
+    //fix these constructors
+    public int costMillions;
+    public int weight;
+    public int maxWeight;
     private int currentCargoWeight = 0;
 
-
-    Rocket() {
-        this.costMillions = costMillions;
-        this.weight = weight;
-        this.maxWeight = maxWeight;
-        //calculate cargo limit
-        cargoLimit = maxWeight - weight;
-
-    }
 
     //getter methods
 
@@ -31,6 +21,8 @@ public class Rocket implements SpaceShip{
     }
 
     public int getCargoLimit() {
+        int cargoLimit;
+        cargoLimit = maxWeight - weight;
         return cargoLimit;
     }
 
@@ -58,7 +50,7 @@ public class Rocket implements SpaceShip{
 
     @Override
     public boolean canCarry(Item cargo) {
-        return (this.currentCargoWeight + cargo.getWeight() <= getCargoLimit());
+        return (currentCargoWeight + cargo.getWeight() <= getCargoLimit());
     }
 
     @Override
@@ -73,3 +65,5 @@ public class Rocket implements SpaceShip{
 
 
 }
+
+

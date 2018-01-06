@@ -48,16 +48,13 @@ public class Simulation {
             //create a loop to iterate and fill up rockets one by one
             U1 u1Rocket = new U1();
             for (Item item : phaseCargo) {
-                    System.out.println(item);
                     if (u1Rocket.canCarry(item)){
                         u1Rocket.carry(item);
-                        phaseCargo.remove(item);
                     } else if (!u1Rocket.canCarry(item)) {
                         u1RocketsArray.add(u1Rocket);
                         u1Rocket = new U1();
                     }
             }
-        System.out.println(u1RocketsArray);
         return u1RocketsArray;
     }
 
@@ -67,16 +64,13 @@ public class Simulation {
 
         U2 u2Rocket = new U2();
         for (Item item : phaseCargo) {
-            System.out.println(item);
             if (u2Rocket.canCarry(item)){
                 u2Rocket.carry(item);
-                phaseCargo.remove(item);
             } else if (!u2Rocket.canCarry(item)) {
                 u2RocketsArray.add(u2Rocket);
                 u2Rocket = new U2();
             }
         }
-        System.out.println(u2RocketsArray);
         return u2RocketsArray;
     }
 
