@@ -36,8 +36,6 @@ public class Rocket implements SpaceShip{
         currentCargoWeight += cargo.getWeight();
     }
 
-
-
     @Override
     public boolean launch() {
         return true;
@@ -48,9 +46,14 @@ public class Rocket implements SpaceShip{
         return true;
     }
 
+    public int getRandomInt() {
+        int randomNumber = (int) ((Math.random() * 100) + 1);
+        return randomNumber;
+    }
+
     @Override
     public boolean canCarry(Item cargo) {
-        return (currentCargoWeight + cargo.getWeight() <= getCargoLimit());
+        return (getCurrentCargoWeight() + cargo.getWeight() <= getCargoLimit());
     }
 
     @Override
@@ -58,8 +61,6 @@ public class Rocket implements SpaceShip{
         if (canCarry(cargo)) {
             //no need to call weight as this is handled in setter
             addCurrentCargoWeight(cargo);
-        } else {
-            System.out.println("Cargo full, unable to add additional items.");
         }
     }
 

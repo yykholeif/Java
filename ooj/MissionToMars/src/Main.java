@@ -4,16 +4,17 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         Simulation simulation = new Simulation();
+        ArrayList<Item> phase1cargo = simulation.loadItems(1);
+        System.out.println("\n");
 
-        ArrayList<Item> cargo = simulation.loadItems(1);
+        simulation.loadU1(phase1cargo);
+        System.out.println("\n");
 
-        simulation.loadU1(cargo);
-        simulation.loadU2(cargo);
-        simulation.runSimulation(2);
+        simulation.runSimulation(1);
+        System.out.println("\n\n\n");
 
-
-        simulation.loadU1(simulation.loadItems(2));
-        simulation.loadU2(simulation.loadItems(2));
+        ArrayList<Item> phase2cargo = simulation.loadItems(2);
+        simulation.loadU1(phase2cargo);
         simulation.runSimulation(2);
 
     }

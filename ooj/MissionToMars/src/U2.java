@@ -16,23 +16,18 @@ public class U2 extends Rocket {
         costMillions = 120;
         weight = 18000;
         maxWeight = 29000;
-        cargoTonnesCarried = getCurrentCargoWeight();
     }
 
     @Override
     public boolean launch() {
-        double probabilityOfExplosion = 0.04 * (cargoTonnesCarried/getCargoLimit());
-        return getRandomDouble() >= probabilityOfExplosion;
+        double probabilityOfExplosion = 4 * (getCurrentCargoWeight()/getCargoLimit());
+        return getRandomInt() >= probabilityOfExplosion;
     }
 
     @Override
     public boolean land() {
-        double probabilityOfExplosion = 0.08 * (cargoTonnesCarried/getCargoLimit());
-        return getRandomDouble() >= probabilityOfExplosion;
+        double probabilityOfExplosion = 8 * (getCurrentCargoWeight()/getCargoLimit());
+        return getRandomInt() >= probabilityOfExplosion;
     }
 
-    private double getRandomDouble() {
-        double randomNumber = (double) Math.random();
-        return randomNumber;
-    }
 }
