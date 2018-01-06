@@ -9,13 +9,12 @@ public class U1 extends Rocket {
      * Chance of landing crash =    1% * (cargo carried / cargo limit)
      */
     private int cargoTonnesCarried = 0;
-//    private static int u1MissionBudgetMillions = 0;
 
     U1() {
         super();
-        int costMillions = 100;
-        int weight = 10000;
-        int maxWeight = 18000;
+        costMillions = 100;
+        weight = 10000;
+        maxWeight = 18000;
         cargoTonnesCarried = getCurrentCargoWeight();
     }
 
@@ -30,7 +29,6 @@ public class U1 extends Rocket {
         double probabilityOfExplosion = 0.01 * (cargoTonnesCarried/getCargoLimit());
         return getRandomDouble() >= probabilityOfExplosion;
     }
-
 
     private double getRandomDouble() {
         double randomNumber = (double) Math.random();

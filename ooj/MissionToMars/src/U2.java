@@ -10,13 +10,12 @@ public class U2 extends Rocket {
      * Chance of landing crash =    8% * (cargo carried / cargo limit)
      */
     private int cargoTonnesCarried = 0;
-//    private static int u2MissionBudgetMillions = 0;
 
     U2() {
         super();
-        int costMillions = 120;
-        int weight = 18000;
-        int maxWeight = 29000;
+        costMillions = 120;
+        weight = 18000;
+        maxWeight = 29000;
         cargoTonnesCarried = getCurrentCargoWeight();
     }
 
