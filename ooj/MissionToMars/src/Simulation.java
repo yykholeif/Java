@@ -19,10 +19,8 @@ public class Simulation {
 
 
             if (phaseNumber == 1){
-                System.out.println("Load Phase 1 items");
                 fileName = "phase-1.txt";
             } else if (phaseNumber == 2) {
-                System.out.println("Load Phase 2 items");
                 fileName = "phase-2.txt";
             }
 
@@ -53,9 +51,10 @@ public class Simulation {
                     } else if (!u1Rocket.canCarry(item)) {
                         u1RocketsArray.add(u1Rocket);
                         u1Rocket = new U1();
+                        u1Rocket.carry(item);
                     }
             }
-        return u1RocketsArray;
+            return u1RocketsArray;
     }
 
     //load U2 rockets with Cargo
@@ -69,6 +68,7 @@ public class Simulation {
             } else if (!u2Rocket.canCarry(item)) {
                 u2RocketsArray.add(u2Rocket);
                 u2Rocket = new U2();
+                u2Rocket.carry(item);
             }
         }
         return u2RocketsArray;
@@ -77,6 +77,7 @@ public class Simulation {
     void runSimulation(int phaseNumber) throws Exception {
 
         //U1 Rocket Simulation
+        System.out.println("Phase: " + phaseNumber);
         System.out.println("U1 Rockets Simulation");
         ArrayList<Item> phaseCargo = loadItems(phaseNumber);
         ArrayList<U1> u1RocketsArray = loadU1(phaseCargo);
@@ -85,49 +86,46 @@ public class Simulation {
         int totalBudgetMillions = 0;
 
         for (U1 rocket : u1RocketsArray) {
-            if (!rocket.launch() || !rocket.land()) {
-                System.out.println("rocket exploded on take-off or landing");
+            while (!rocket.launch()) {
+                System.out.println("Rocket exploded on take-off. Rocket relaunched");
                 rocket.launch(); //not sure if this works like a while loop, if this returns true will it retry if statement?
                 rocketCount ++;
-            } else {
-                System.out.println("Rocket Successfully landed on Mars. Rocket Number: " + u1RocketsArray.indexOf(rocket));
+            }
+            while(!rocket.land()) {
+                System.out.println("Rocket exploded on landing. Rocket relaunched");
+                rocket.launch(); //not sure if this works like a while loop, if this returns true will it retry if statement?
                 rocketCount ++;
             }
+            System.out.println("Rocket Successfully landed on Mars.");
+            rocketCount ++;
             totalBudgetMillions = 100 * rocketCount;
         }
-        System.out.println("Phase: " + phaseNumber);
-        System.out.println("U1 total mission budget: $" + totalBudgetMillions);
+        System.out.println("U1 total mission budget: $" + totalBudgetMillions + " Million");
 
 
         //U2 Rocket Simulation
+        System.out.println("\n");
         System.out.println("U2 Rockets Simulation ");
         ArrayList<U2> u2RocketsArray = loadU2(phaseCargo);
-
         rocketCount = 0;
         totalBudgetMillions = 0;
 
         for (U2 rocket : u2RocketsArray) {
-            if (!rocket.launch() || !rocket.land()) {
-                System.out.println("rocket exploded on take-off or landing");
+            while (!rocket.launch()) {
+                System.out.println("Rocket exploded on take-off. Rocket relaunched");
                 rocket.launch(); //not sure if this works like a while loop, if this returns true will it retry if statement?
                 rocketCount ++;
-            } else {
-                System.out.println("Rocket Successfully landed on Mars. Rocket Number: " + u2RocketsArray.indexOf(rocket));
+            }
+            while(!rocket.land()) {
+                System.out.println("Rocket exploded on landing. Rocket relaunched");
+                rocket.launch(); //not sure if this works like a while loop, if this returns true will it retry if statement?
                 rocketCount ++;
             }
+            System.out.println("Rocket Successfully landed on Mars.");
+            rocketCount ++;
             totalBudgetMillions = 120 * rocketCount;
         }
-        System.out.println("Phase: " + phaseNumber);
-        System.out.println("U2 total mission budget: $" + totalBudgetMillions);
+        System.out.println("U2 total mission budget: $" + totalBudgetMillions +" Million");
 
     }
-
-
-// DRY up code by inputting phase 2 parameters: create seperate function for redundant code. get down to 100 lines
-// load phase 1/2 can be 1 function with parameter
-    //1 function for runSimulation as well
-
-
-
-
 }
